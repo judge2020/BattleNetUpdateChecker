@@ -6,7 +6,7 @@ import praw
 import time  # need more time
 import urllib.request
 from bs4 import BeautifulSoup
-import html2text
+import pypandoc
 
 reddit = praw.Reddit(client_id=config.reddit_client_id,
                      client_secret=config.reddit_client_secret,
@@ -18,7 +18,7 @@ print('Trying to log in...')
 print('Logged in as:' + reddit.user.me().name)
 
 
-class Handler:
+class MDhandler:
     Hearthstone = 'wtcg'
     Overwatch = 'Pro'
     Starcraft2 = 'sc2'
@@ -36,26 +36,41 @@ class Handler:
         return html
 
     def markupify(str):
-        return html2text.html2text(str)
+        md = pypandoc.convert_text(str, 'md', format='html')
+        return md
 
     def get_patch_notes_maincontent(str):
         mySoup = BeautifulSoup(str, 'html.parser')
-        return mySoup.find('div', {"class":"patch-notes-interior"})
+        stuff = mySoup.find('div', {"class": "patch-notes-interior"})
+        return stuff
 
     def fix(byte):
-        return byte.decode('utf8')
+        str = byte.decode('utf8')
+        str = str.strip('\n')
+        return str
 
     def get_patchnotes_md(self, game):
         raw = self.get_patchnotes_raw(game)
-        fixed = self.fix(raw) + '</script>'
+        fixed = self.fix(raw)
         mc = self.get_patch_notes_maincontent(raw)
         return self.markupify(mc)
+
+    def get_patch_version(self, game):
+        raw = self.get_patchnotes_raw(game)
+        fixed = self.fix(raw)
+
 
 
 def main_timer():
     print('handle timer')
 
 
+try:
+    pypandoc._ensure_pandoc_path()
+except:
+    # need to download pandoc
+    pypandoc.download_pandoc()
+
 while True:
-    print(Handler.get_patchnotes_md(Handler, Handler.Hearthstone))
+    print(MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
     time.sleep(config.timerInterval)
