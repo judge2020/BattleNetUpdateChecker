@@ -81,7 +81,7 @@ def main_timer():
             Last_ver.truncate(0)
             Last_ver.write(ver)
             bnet = reddit.subreddit('Hearthstone')
-            bnet.submit('Hearthstone Update test ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+            bnet.submit('Hearthstone Update ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
         except:
             print('err')
     Last_ver.close()
