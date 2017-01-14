@@ -74,7 +74,7 @@ def main_timer():
         return
     else:
         bnet = reddit.subreddit('battlenet')
-        bnet.submit('HS version ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+        bnet.submit('Hearthstone Update ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
         #need to post to reddit
 
 
