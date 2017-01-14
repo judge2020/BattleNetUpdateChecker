@@ -73,14 +73,15 @@ class MDhandler:
 def main_timer():
     Last_ver = open('latest.txt', 'r+')
     ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
-    if (ver == Last_ver.read()):
+    if (ver in Last_ver.read()):
         return
     else:
         try:
+            print('New update: ' + ver)
             Last_ver.truncate(0)
             Last_ver.write(ver)
             bnet = reddit.subreddit('Hearthstone')
-            bnet.submit('Hearthstone Update ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+            bnet.submit('Hearthstone Update test ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
         except:
             print('err')
     Last_ver.close()
