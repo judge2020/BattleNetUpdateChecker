@@ -6,4 +6,10 @@ Scripts that check for updates to patch notes for battle.net games and posts to 
 
 ## usage
 
-copy config_example.py to config.py and edit it to your liking. see [praw docs](https://praw.readthedocs.io/en/latest/getting_started/authentication.html#script-application) for what the fields mean.
+```python
+pip install -r requirements.txt
+```
+
+copy config_example.py to config.py and edit it to your configuration. see [praw docs](https://praw.readthedocs.io/en/latest/getting_started/authentication.html#script-application) for what the fields mean.
+
+
