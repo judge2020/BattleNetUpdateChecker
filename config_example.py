@@ -4,8 +4,8 @@
 timerInterval = 20
 
 #reddit config
-reddit_client_id='SI8pN3DSbt0zor'
-reddit_client_secret='xaxkj7HNh8kwg8e5t4m6KvSrbTI'
-reddit_password='1guiwevlfo00esyy'
-reddit_user_agent='testscript by /u/Author'
-reddit_username='fakebot3'
+reddit_client_id='8MTmpqGgWWc9PQ'
+reddit_client_secret='1LMPy5T0Vq3MsJQIShSATamurus'
+reddit_password='hJu8dexXDhk)b>qrh,PCmsWA'
+reddit_user_agent='PYtests travis bot by /u/judge2020'
+reddit_username='TravisPytestBot'

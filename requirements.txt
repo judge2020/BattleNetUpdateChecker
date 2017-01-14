@@ -3,3 +3,4 @@ praw
 beautifulsoup4
 markdown2
 pypandoc
+pytest

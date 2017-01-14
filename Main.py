@@ -27,7 +27,6 @@ class MDhandler:
     HOTS = 'heroes'
 
     def get_patchnotes_raw(game):
-        print('Getting patch notes for ' + game + ' in language english')
         url = 'https://us.battle.net/connect/en/app/' + game + '/patch-notes?productType=' + game
 
         headers = {'User-Agent': 'Battle.net/1.0.8.4217'}
@@ -58,11 +57,25 @@ class MDhandler:
     def get_patch_version(self, game):
         raw = self.get_patchnotes_raw(game)
         fixed = self.fix(raw)
+        mc = self.get_patch_notes_maincontent(fixed)
+        for line in str(mc).split('\n'):
+            if '<p><strong>Patch' in line:
+                nl = line.replace('<p><strong>Patch ', '')
+                nl = nl.replace(' </strong></p>', '')
+                return nl
+
 
 
 
 def main_timer():
-    print('handle timer')
+    Last_ver = open('latest.txt', 'r').read()
+    ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
+    if (ver == Last_ver):
+        return
+    else:
+        bnet = reddit.subreddit('battlenet')
+        bnet.submit('HS version ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+        #need to post to reddit
 
 
 try:
@@ -72,5 +85,5 @@ except:
     pypandoc.download_pandoc()
 
 while True:
-    print(MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+    main_timer()
     time.sleep(config.timerInterval)
