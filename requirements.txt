@@ -1,2 +1,5 @@
 #requirements via pip
 praw
+beautifulsoup4
+markdown2
+html2text
