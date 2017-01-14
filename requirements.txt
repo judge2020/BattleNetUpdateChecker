@@ -1,1 +1,2 @@
 #requirements via pip
+praw
