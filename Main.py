@@ -52,7 +52,10 @@ class MDhandler:
         raw = self.get_patchnotes_raw(game)
         fixed = self.fix(raw)
         mc = self.get_patch_notes_maincontent(raw)
-        return self.markupify(mc)
+        md = self.markupify(mc)
+        md = md.replace('<div class="patch-notes-interior">', '')
+        md = md.replace('</div>', '')
+        return md
 
     def get_patch_version(self, game):
         raw = self.get_patchnotes_raw(game)
@@ -68,14 +71,18 @@ class MDhandler:
 
 
 def main_timer():
-    Last_ver = open('latest.txt', 'r').read()
+    Last_ver = open('latest.txt', 'r+')
     ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
-    if (ver == Last_ver):
+    if (ver == Last_ver.read()):
         return
     else:
-        bnet = reddit.subreddit('battlenet')
-        bnet.submit('Hearthstone Update ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
-        #need to post to reddit
+        try:
+            Last_ver.write(ver)
+            bnet = reddit.subreddit('battlenet')
+            bnet.submit('Hearthstone Update ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+        except:
+            print('err')
+    Last_ver.close()
 
 
 try:
