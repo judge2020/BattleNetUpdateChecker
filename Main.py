@@ -72,7 +72,7 @@ def main_timer():
     ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
     if (ver in Last_ver.read()):
         Last_ver.close()
-        return
+        pass
     else:
         try:
             Last_ver.close()
@@ -80,9 +80,28 @@ def main_timer():
             print('New update: ' + ver)
             Last_ver.write(ver)
             bnet = reddit.subreddit('Hearthstone')
-            bnet.submit('Hearthstone Update ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+            bnet.submit('Hearthstone Update ' + time.strftime("%m/%d/%Y"),
+                        MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
         except:
             print('err')
+    Last_ver.close()
+
+    Last_verOW = open('latest-OW.txt', 'r')
+    ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
+    if (ver in Last_verOW.read()):
+        Last_verOW.close()
+        pass
+    else:
+        try:
+            Last_verOW.close()
+            Last_verOW = open('latest-OW.txt', 'w')
+            print('New update OW: ' + ver)
+            Last_verOW.write(ver)
+            bnet = reddit.subreddit('battlenet')
+            bnet.submit('Overwatch Update ' + time.strftime("%m/%d/%Y"),
+                        MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
+        except:
+            print('err OW')
     Last_ver.close()
 
 
