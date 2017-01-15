@@ -97,7 +97,7 @@ def main_timer():
             Last_verOW = open('latest-OW.txt', 'w')
             print('New update OW: ' + ver)
             Last_verOW.write(ver)
-            bnet = reddit.subreddit('battlenet')
+            bnet = reddit.subreddit('Overwatch')
             bnet.submit('Overwatch Update ' + time.strftime("%m/%d/%Y"),
                         MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
         except:
