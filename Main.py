@@ -61,27 +61,26 @@ class MDhandler:
         raw = self.get_patchnotes_raw(game)
         fixed = self.fix(raw)
         mc = self.get_patch_notes_maincontent(fixed)
-        for line in str(mc).split('\n'):
-            if '<p><strong>Patch' in line:
-                nl = line.replace('<p><strong>Patch ', '')
-                nl = nl.replace(' </strong></p>', '')
-                return nl
+        striped = str(mc).split('\n')
+        return striped[1]
 
 
 
 
 def main_timer():
-    Last_ver = open('latest.txt', 'r+')
+    Last_ver = open('latest.txt', 'r')
     ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
     if (ver in Last_ver.read()):
+        Last_ver.close()
         return
     else:
         try:
+            Last_ver.close()
+            Last_ver = open('latest.txt', 'w')
             print('New update: ' + ver)
-            Last_ver.truncate(0)
             Last_ver.write(ver)
             bnet = reddit.subreddit('Hearthstone')
-            bnet.submit('Hearthstone Update ' + ver, MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+            bnet.submit('Hearthstone Update ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
         except:
             print('err')
     Last_ver.close()
@@ -90,7 +89,7 @@ def main_timer():
 try:
     pypandoc._ensure_pandoc_path()
 except:
-    # need to download pandoc
+    # need 2 download pandoc
     pypandoc.download_pandoc()
 
 while True:
