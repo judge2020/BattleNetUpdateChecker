@@ -118,4 +118,4 @@ while True:
         time.sleep(config.timerInterval)
 
     except:
-        print('Unknown error: ' + sys.exc_info()[0])
+        print('Unknown error')
