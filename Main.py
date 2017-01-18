@@ -7,6 +7,7 @@ import time  # need more time
 import urllib.request
 from bs4 import BeautifulSoup
 import pypandoc
+import sys
 
 reddit = praw.Reddit(client_id=config.reddit_client_id,
                      client_secret=config.reddit_client_secret,
@@ -112,5 +113,9 @@ except:
     pypandoc.download_pandoc()
 
 while True:
-    main_timer()
-    time.sleep(config.timerInterval)
+    try:
+        main_timer()
+        time.sleep(config.timerInterval)
+
+    except:
+        print('Unknown error: ' + sys.exc_info()[0])
