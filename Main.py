@@ -9,14 +9,7 @@ from bs4 import BeautifulSoup
 import pypandoc
 import sys
 
-reddit = praw.Reddit(client_id=config.reddit_client_id,
-                     client_secret=config.reddit_client_secret,
-                     password=config.reddit_password,
-                     user_agent=config.reddit_user_agent,
-                     username=config.reddit_username)
 
-print('Trying to log in...')
-print('Logged in as:' + reddit.user.me().name)
 
 
 class MDhandler:
@@ -67,43 +60,70 @@ class MDhandler:
 
 
 
+class timerHandler:
+    interv = 1
 
-def main_timer():
-    Last_ver = open('latest.txt', 'r')
-    ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
-    if (ver in Last_ver.read()):
-        Last_ver.close()
-        pass
-    else:
-        try:
+    def post_reddit(self, subreddit, title, content):
+        reddit = praw.Reddit(client_id=config.reddit_client_id,
+                             client_secret=config.reddit_client_secret,
+                             password=config.reddit_password,
+                             user_agent=config.reddit_user_agent,
+                             username=config.reddit_username)
+
+        print('Trying to log in to reddit...')
+        print('Logged in as:' + reddit.user.me().name)
+        DeSubreddit = reddit.subreddit(subreddit)
+        DeSubreddit.submit(title, content)
+        return
+
+
+    def CheckHS(self):
+        Last_ver = open('latest.txt', 'r')
+        ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
+        if ver in Last_ver.read():
+            Last_ver.close()
+            return
+        else:
+
             Last_ver.close()
             Last_ver = open('latest.txt', 'w')
             print('New update: ' + ver)
             Last_ver.write(ver)
-            bnet = reddit.subreddit('Hearthstone')
-            bnet.submit('Hearthstone Update ' + time.strftime("%m/%d/%Y"),
-                        MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
-        except:
-            print('err')
-    Last_ver.close()
+            Last_ver.close()
+            self.post_reddit(self, 'Hearthstone', 'Hearthstone Update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
 
-    Last_verOW = open('latest-OW.txt', 'r')
-    ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
-    if (ver in Last_verOW.read()):
-        Last_verOW.close()
-        pass
-    else:
-        try:
+        return
+
+    def CheckOW(self):
+        Last_verOW = open('latest-OW.txt', 'r')
+        ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
+        if ver in Last_verOW.read():
+            Last_verOW.close()
+            return
+        else:
             Last_verOW.close()
             Last_verOW = open('latest-OW.txt', 'w')
             print('New update OW: ' + ver)
             Last_verOW.write(ver)
-            bnet = reddit.subreddit('Overwatch')
-            bnet.submit('Overwatch Update ' + time.strftime("%m/%d/%Y"),
-                        MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
+            Last_verOW.close()
+            self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
+        return
+
+
+    def mainTimer(self):
+        try:
+            if self.interv == 1:
+                self.CheckHS(self)
+                self.interv += 1
+                pass
+
+            elif self.interv == 2:
+                self.CheckOW(self)
+                self.interv == 1
+                pass
         except:
-            print('err OW')
-    Last_ver.close()
+            print('Unknown exception! '+ sys.exc_info()[0])
+
 
 
 try:
@@ -113,9 +133,5 @@ except:
     pypandoc.download_pandoc()
 
 while True:
-    try:
-        main_timer()
-        time.sleep(config.timerInterval)
-
-    except:
-        print('Unknown error')
+    timerHandler.mainTimer(timerHandler)
+    time.sleep(config.timerInterval)
