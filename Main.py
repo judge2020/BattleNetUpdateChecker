@@ -81,7 +81,7 @@ class timerHandler:
         Last_ver = open('latest.txt', 'r', encoding='utf8')
         read = Last_ver.read().strip('\n')
         ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
-        if ver in read:
+        if ver == read:
             Last_ver.close()
             return
         else:
