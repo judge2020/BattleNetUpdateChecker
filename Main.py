@@ -97,16 +97,19 @@ class timerHandler:
     def CheckOW(self):
         Last_verOW = open('latest-OW.txt', 'r')
         ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
+        print('1' + ver)
+        print('2' + Last_verOW.read())
         if ver in Last_verOW.read():
             Last_verOW.close()
             return
         else:
+            print('3' + Last_verOW.read())
             Last_verOW.close()
             Last_verOW = open('latest-OW.txt', 'w')
             print('New update OW: ' + ver)
             Last_verOW.write(ver)
             Last_verOW.close()
-            self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
+            #self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
         return
 
 
