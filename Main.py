@@ -73,7 +73,8 @@ class timerHandler:
         print('Trying to log in to reddit...')
         print('Logged in as:' + reddit.user.me().name)
         DeSubreddit = reddit.subreddit(subreddit)
-        DeSubreddit.submit(title, content)
+        submission = DeSubreddit.submit(title, content)
+        reddit.redditor('judge2020').message('Posted Update ' + title, 'Hello master.')
         return
 
 
