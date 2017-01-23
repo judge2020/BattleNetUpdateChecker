@@ -99,7 +99,8 @@ class timerHandler:
         ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
         print('1' + ver)
         print('2' + Last_verOW.read())
-        if ver in Last_verOW.read():
+        fileRead = Last_verOW.read().decode()
+        if ver in fileRead:
             Last_verOW.close()
             return
         else:
