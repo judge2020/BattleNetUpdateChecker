@@ -96,14 +96,15 @@ class timerHandler:
 
     def CheckOW(self):
         Last_verOW = open('latest-OW.txt', 'r', encoding='utf8')
+        owRead = Last_verOW.read().strip('\n')
         ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
         print('1' + ver)
-        print('2' + Last_verOW.read())
-        if ver == Last_verOW.read():
+        print('2' + owRead)
+        if ver == owRead:
             Last_verOW.close()
             return
         else:
-            print('3' + Last_verOW.read())
+            print('3' + owRead)
             Last_verOW.close()
             Last_verOW = open('latest-OW.txt', 'w', encoding='utf8')
             print('New update OW: ' + ver)
