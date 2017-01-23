@@ -78,7 +78,7 @@ class timerHandler:
 
 
     def CheckHS(self):
-        Last_ver = open('latest.txt', 'r')
+        Last_ver = open('latest.txt', 'r', encoding='utf8')
         ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
         if ver in Last_ver.read():
             Last_ver.close()
@@ -86,7 +86,7 @@ class timerHandler:
         else:
 
             Last_ver.close()
-            Last_ver = open('latest.txt', 'w')
+            Last_ver = open('latest.txt', 'w', encoding='utf8')
             print('New update: ' + ver)
             Last_ver.write(ver)
             Last_ver.close()
@@ -95,7 +95,7 @@ class timerHandler:
         return
 
     def CheckOW(self):
-        Last_verOW = open('latest-OW.txt', 'r')
+        Last_verOW = open('latest-OW.txt', 'r', encoding='utf8')
         ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
         print('1' + ver)
         print('2' + Last_verOW.read())
@@ -105,7 +105,7 @@ class timerHandler:
         else:
             print('3' + Last_verOW.read())
             Last_verOW.close()
-            Last_verOW = open('latest-OW.txt', 'w')
+            Last_verOW = open('latest-OW.txt', 'w', encoding='utf8')
             print('New update OW: ' + ver)
             Last_verOW.write(ver)
             Last_verOW.close()
