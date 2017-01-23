@@ -125,7 +125,7 @@ class timerHandler:
                 self.interv == 1
                 pass
         except:
-            print('Unknown exception! '+ sys.exc_info()[0])
+            print('Unknown exception! '+ str(sys.exc_info()[0]))
 
 
 
