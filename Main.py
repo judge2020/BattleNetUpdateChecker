@@ -8,7 +8,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import pypandoc
 import sys
-
+import os
 
 
 
@@ -92,7 +92,7 @@ class timerHandler:
             Last_ver.write(ver)
             Last_ver.close()
             self.post_reddit(self, 'Hearthstone', 'Hearthstone Update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
-
+            os.execv(sys.executable, ['python3 '] + sys.argv)
         return
 
     def CheckOW(self):
@@ -109,6 +109,7 @@ class timerHandler:
             Last_verOW.write(ver)
             Last_verOW.close()
             self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
+            os.execv(sys.executable, ['python3 '] + sys.argv)
         return
 
 
@@ -134,6 +135,7 @@ except:
     # need 2 download pandoc
     pypandoc.download_pandoc()
 
-while True:
-    timerHandler.mainTimer(timerHandler)
-    time.sleep(config.timerInterval)
+if __name__ == '__main__':
+    while True:
+        timerHandler.mainTimer(timerHandler)
+        time.sleep(config.timerInterval)
