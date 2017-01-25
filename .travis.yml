@@ -7,6 +7,8 @@ python:
 install: 
  - "pip install -r requirements.txt"
  - "pip install coveralls"
-script: py.test
+script:
+  - "cp config_example.py config.py"
+  - "py.test"
 after_success:
  - coveralls
