@@ -9,4 +9,5 @@ class testClass(unittest.TestCase):
     def test_bytefix(self):
         assert Main.MDhandler.fix(b'<p><strong>Hearthstone Update 11/29/16</strong></p>') == '<p><strong>Hearthstone Update 11/29/16</strong></p>'
 
-
+    def test_PatchVersion(self):
+        assert '17' in Main.MDhandler.get_patch_version(Main.MDhandler, Main.MDhandler.Overwatch)

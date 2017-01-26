@@ -92,7 +92,6 @@ class timerHandler:
             Last_ver.write(ver)
             Last_ver.close()
             self.post_reddit(self, 'Hearthstone', 'Hearthstone Update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
-            os.execv(sys.executable, ['python3 '] + sys.argv)
         return
 
     def CheckOW(self):
@@ -109,7 +108,6 @@ class timerHandler:
             Last_verOW.write(ver)
             Last_verOW.close()
             self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
-            os.execv(sys.executable, ['python3 '] + sys.argv)
         return
 
 
