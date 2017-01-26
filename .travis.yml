@@ -10,5 +10,6 @@ install:
 script:
   - "cp config_example.py config.py"
   - "py.test"
+  - "coverage run --source=Main test_bnetupdate.py test"
 after_success:
  - coveralls
