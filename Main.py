@@ -86,12 +86,17 @@ class timerHandler:
             Last_ver.close()
             return
         else:
-            Last_ver.close()
-            Last_ver = open('latest.txt', 'w', encoding='utf8')
-            print('New update: ' + ver)
-            Last_ver.write(ver)
-            Last_ver.close()
-            self.post_reddit(self, 'Hearthstone', 'Hearthstone Update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
+            ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
+            if ver == read:
+                Last_ver.close()
+                return
+            else:
+                Last_ver.close()
+                Last_ver = open('latest.txt', 'w', encoding='utf8')
+                print('New update: ' + ver)
+                Last_ver.write(ver)
+                Last_ver.close()
+                self.post_reddit(self, 'Hearthstone', 'Hearthstone Update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
         return
 
     def CheckOW(self):
@@ -102,12 +107,19 @@ class timerHandler:
             Last_verOW.close()
             return
         else:
-            Last_verOW.close()
-            Last_verOW = open('latest-OW.txt', 'w', encoding='utf8')
-            print('New update OW: ' + ver)
-            Last_verOW.write(ver)
-            Last_verOW.close()
-            self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
+            #check again
+            ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
+            if ver == owRead:
+                Last_verOW.close()
+                return
+            else:
+
+                Last_verOW.close()
+                Last_verOW = open('latest-OW.txt', 'w', encoding='utf8')
+                print('New update OW: ' + ver)
+                Last_verOW.write(ver)
+                Last_verOW.close()
+                self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
         return
 
 
