@@ -132,7 +132,7 @@ class timerHandler:
 
     def mainTimer(self):
         try:
-            sys.stdout = open("BattleNetUpdateChecker.log", "rw")
+            sys.stdout = open("BattleNetUpdateChecker.log", "r+")
             if self.interv == 1:
                 self.CheckHS(self)
                 self.interv += 1
