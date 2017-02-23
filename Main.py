@@ -9,8 +9,7 @@ from bs4 import BeautifulSoup
 import pypandoc
 import sys
 import os
-
-
+from difflib import SequenceMatcher
 
 class MDhandler:
     Hearthstone = 'wtcg'
@@ -58,6 +57,8 @@ class MDhandler:
         striped = str(mc).split('\n')
         return striped[1]
 
+    def similar(a, b):
+        return SequenceMatcher(None, a, b).ratio()
 
 
 class timerHandler:
@@ -77,23 +78,27 @@ class timerHandler:
         reddit.redditor('judge2020').message('Posted Update ' + title, 'Hello master.')
         return
 
-
     def CheckHS(self):
         Last_ver = open('latest.txt', 'r', encoding='utf8')
-        read = Last_ver.read().strip('\n')
-        ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
+        read = Last_ver.read()
+        ver = MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone)
         if ver == read:
             Last_ver.close()
             return
         else:
-            ver = MDhandler.get_patch_version(MDhandler, MDhandler.Hearthstone)
-            if ver == read:
+            similarity = MDhandler.similar(ver, read)
+            if similarity > 0.8:
+                print('likely hit the bug HS')
+                print(similarity)
+                Last_ver = open('latest.txt', 'w', encoding='utf8')
+                Last_ver.write(ver)
                 Last_ver.close()
                 return
             else:
                 Last_ver.close()
                 Last_ver = open('latest.txt', 'w', encoding='utf8')
-                print('New update: ' + ver)
+                print('New update: ')
+                print(similarity)
                 Last_ver.write(ver)
                 Last_ver.close()
                 self.post_reddit(self, 'Hearthstone', 'Hearthstone Update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Hearthstone))
@@ -101,30 +106,33 @@ class timerHandler:
 
     def CheckOW(self):
         Last_verOW = open('latest-OW.txt', 'r', encoding='utf8')
-        owRead = Last_verOW.read().strip('\n')
-        ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
+        owRead = Last_verOW.read()
+        ver = MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch)
         if ver == owRead:
             Last_verOW.close()
             return
         else:
-            #check again
-            ver = MDhandler.get_patch_version(MDhandler, MDhandler.Overwatch)
-            if ver == owRead:
+            similarity = MDhandler.similar(ver, owRead)
+            if similarity > 0.8:
+                print('likely hit the bug OW')
+                print(similarity)
+                Last_verOW = open('latest-OW.txt', 'w', encoding='utf8')
+                Last_verOW.write(ver)
                 Last_verOW.close()
                 return
             else:
-
+                print(similarity)
                 Last_verOW.close()
                 Last_verOW = open('latest-OW.txt', 'w', encoding='utf8')
-                print('New update OW: ' + ver)
+                print('New update OW')
                 Last_verOW.write(ver)
                 Last_verOW.close()
                 self.post_reddit(self, 'Overwatch', 'Overwatch update for ' + time.strftime("%m/%d/%Y"), MDhandler.get_patchnotes_md(MDhandler, MDhandler.Overwatch))
         return
 
-
     def mainTimer(self):
         try:
+            sys.stdout = open("BattleNetUpdateChecker.log", "w")
             if self.interv == 1:
                 self.CheckHS(self)
                 self.interv += 1
@@ -135,8 +143,8 @@ class timerHandler:
                 self.interv == 1
                 pass
         except:
-            print('Unknown exception! '+ str(sys.exc_info()[0]))
-
+            print('Unknown exception! ' + str(sys.exc_info()[0]))
+            raise
 
 
 try:

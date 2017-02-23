@@ -1,0 +1,24 @@
+
+
+Overwatch Patch Notes – February 8, 2017
+========================================
+
+A new patch is now live on Windows PC. Read below to learn about the
+latest changes.
+
+To share your feedback, please post in the [General
+Discussion](http://us.battle.net/forums/en/overwatch/22813879/) forum.\
+For a list of known issues, visit our [Bug
+Report](http://us.battle.net/forums/en/overwatch/22813881/)forum.\
+For troubleshooting assistance, visit our [Technical
+Support](http://us.battle.net/forums/en/overwatch/22813880/) forum.
+
+BUG FIXES
+---------
+
+**General**
+
+-   Fixed an issue that prevented the Year of the Rooster version of
+    Lijang Tower from being playable in Quick Play and Competitive Play
+
+

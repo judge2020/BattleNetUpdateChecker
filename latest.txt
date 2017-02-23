@@ -1,1 +1,50 @@
-<p><strong>Hearthstone Update – 11/29/16</strong></p>
+
+
+**Hearthstone Update – 11/29/16**
+
+**Patch 7.0.0.15590**
+
+The Tavern’s never been more rough and tumble! This Hearthstone update
+paves the way for the arrival of The Mean Streets of Gadgetzan,
+Hearthstone’s latest expansion. Join three crime families as they vie
+for power in the back alleys of Gadgetzan with all-new Tri-Class cards,
+and a gritty game board featuring each of the city’s districts. This
+update also adds several swanky new card backs and fixes some bugs.
+
+Read on for details!
+
+**The Mean Streets of Gadgetzan**
+
+-   Grab your shiniest brass knuckles and get ready to rumble on The
+    Mean Streets of Gadgetzan. Hearthstone’s latest expansion will be
+    available beginning December 1^st^ and includes:
+    -   132 all-new cards.
+    -   Tri-Class cards - special neutral minions that break the rules
+        to be included in the decks of all three classes associated with
+        each family:
+        -   The Grimy Goons: Warrior, Paladin, and Hunter
+        -   The Kabal: Mage, Priest, and Warlock
+        -   The Jade Lotus: Rogue, Druid, and Shaman
+    -   A new game board featuring each district of Gadgetzan that’ll
+        have you calling your friends to come out to play.
+-   The following card backs have been added.
+    -   Jade Lotus – Acquired by achieving Rank 20 in Ranked Play,
+        December 2016.
+    -   Grimy Goons – Acquired by achieving Rank 20 in Ranked Play,
+        January 2017.
+    -   Kabal – Acquired by achieving Rank 20 in Ranked Play,
+        February 2017.
+    -   And perhaps one more card back to come, should the stars align.
+        . .
+-   A search for **missing** in the Collection Manager will now
+    automatically switch you to Crafting Mode and find any cards that
+    you are missing or don’t already own two or more copies of.
+-   Several cards now properly generate a history tile when played.
+-   We’ve implemented numerous AI improvements and bug fixes.
+-   We fixed a client issue that could occur when playing multiple
+    spells while Archmage Antonidas is in play.
+-   We fixed a Spectator Mode issue that could occur when Raven Idol
+    is played.
+-   Various UI & text issues have been resolved.
+
+
