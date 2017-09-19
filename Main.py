@@ -10,6 +10,7 @@ import pypandoc
 import sys
 import os
 from difflib import SequenceMatcher
+import traceback
 
 class MDhandler:
     Hearthstone = 'wtcg'
@@ -155,5 +156,9 @@ except:
 
 if __name__ == '__main__':
     while True:
-        timerHandler.mainTimer(timerHandler)
-        time.sleep(config.timerInterval)
+        try:
+            timerHandler.mainTimer(timerHandler)
+            time.sleep(config.timerInterval)
+        except:
+            traceback.format_exec()
+            time.sleep(config.timerInterval)
